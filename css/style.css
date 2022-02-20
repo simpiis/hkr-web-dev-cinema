@@ -1,0 +1,45 @@
+body {
+  margin: 0;
+  background-color: rgba(79, 89, 221, 0.623);
+  font-size: 17px;
+  line-height: 135%;
+  /* part of the sticky footer solution */
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+nav a {
+  color: rgb(218, 214, 214);
+  padding: 0 10px;
+  text-decoration: none;
+}
+h1 {  
+  color: rgb(143, 12, 12);
+}
+nav a {
+  color: rgb(218, 214, 214);
+  padding: 0 10px;
+  text-decoration: none;
+}
+
+nav .active {
+  color: white;
+}
+header {
+  background-color: rgb(190, 67, 98);
+  padding: 20px;
+  margin-bottom: 30px;
+}
+footer {
+  text-align: center;
+  margin-top: 30px;
+  color: white;
+  padding: 20px;
+  background-color: rgb(143, 12, 12);
+}
+
+main article {
+  margin: 0 auto;
+  max-width: 650px;
+  padding: 20px;
+}
