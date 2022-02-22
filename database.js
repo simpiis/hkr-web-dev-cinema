@@ -18,7 +18,7 @@ console.log(movies);
 
 
 
-// get seat_list from a specific showing, can be used to print the booking section later
+// get seat_list from a specific showing, can be used to print the booking section later, requires movie title and start time to function at the moment
 
 let movieTitleTest = 'Warcraft'
 let startTimeTest = '2022-02-19 16:54:00'
