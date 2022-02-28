@@ -38,9 +38,9 @@ function verifyLogin(username, password) {
 verifyLogin("asd", "wasd");  // there is currently a placeholder user with these credentials
 verifyLogin("wasd", "asd"); // test to see if login fails
 
-testExamples();
+//testExamples();
 
-getMovieLinks();
+//getMovieLinks();
 
 
 
