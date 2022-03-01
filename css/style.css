@@ -60,3 +60,23 @@ main article {
   position:center;
  
 }
+
+.moviestable {
+  margin-left: auto;
+  margin-right: auto;
+  font-size:25px;
+  text-align:center;
+  border: 1px solid white n;
+}
+
+.bookButton {
+  background-color: rgb(190, 67, 98);
+  border: none;
+  color: white;
+  padding: 20px 40px;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  float:right;
+}
