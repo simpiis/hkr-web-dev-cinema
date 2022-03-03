@@ -80,3 +80,8 @@ main article {
   cursor: pointer;
   float:right;
 }
+
+.account-content {
+  text-align: center;
+  justify-content: center;
+}
