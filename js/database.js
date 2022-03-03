@@ -1,15 +1,9 @@
 const betterSqlite3 = require('better-sqlite3');
 
-const db = betterSqlite3('./database/moviedb.db');
+const db = betterSqlite3('../database/moviedb.db');
 
 // set directory to hkr-web-dev-cinema,
 //type node database.js in terminal to run code
-
-
-let storage = window.sessionStorage; // local session memory
-
-
-
 
 
 
@@ -25,31 +19,28 @@ function getMovieLinks() {
   console.log(links);
 }
 
-function verifyLogin(username, password) {
+ function verifyLogin(username, password) {
   let stmt = db.prepare("SELECT * FROM accounts WHERE username = '" + username + "' AND password = '" + password + "'");
   user = stmt.all();
 
   console.log(user);
 
   if (user.length !=0) {
-    storage.setItem("user", true);
+    sessionStorage.setItem("user", user[0].username);
 
-    
     console.log("logged in");
 
-    //set html layout/move to logged in html
+    
   } else {
     console.log("invalid credentials")
-    //alert box? reset text fields?
+    
   }
   
 }
 
-// test values to verify that account is working
-verifyLogin("asd", "wasd");  // there is currently a placeholder user with these credentials
-verifyLogin("wasd", "asd"); // test to see if login fails
 
-//testExamples();
+
+testExamples();
 
 //getMovieLinks();
 
@@ -60,7 +51,7 @@ verifyLogin("wasd", "asd"); // test to see if login fails
 
 function testExamples() {
   // select statement -- get everything about every movie
-  let stmtSelectAllMovies = db.prepare(`
+/*  let stmtSelectAllMovies = db.prepare(`
 SELECT * FROM movies
 `)
 
@@ -68,6 +59,7 @@ SELECT * FROM movies
 
   console.log(movies);
 
+  */
 
 
 
@@ -81,11 +73,21 @@ SELECT * FROM movies
 
   let seats = stmt.all();
 
-  let seatInfo = seats[0].seat_list.split(",");
+  let seatInfo = seats[0].seat_list;
 
 
   console.log(seatInfo);
+  seatInfo=markSeat(seatInfo,2,'t');
+  console.log(seatInfo);
+
+
   
+}
+
+function markSeat(seatInfo,index,value) {
+  seatInfo = seatInfo.substr(0, index) + value + seatInfo.substr(index + 1);
+
+  return seatInfo
 }
 
 
