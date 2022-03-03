@@ -12,7 +12,7 @@ let db = new sqlite3.Database("database\\moviedb.db", sqlite3.OPEN_READWRITE, (e
 
 // Query to select the trailer link rows for the movies table
 let sql = `SELECT link FROM movies`;
-
+let sql = `SELECT * FROM movies`;
 
 // Goes through the database with he sql query
 db.all(sql, [], (err, rows) => {
@@ -30,6 +30,7 @@ db.all(sql, [], (err, rows) => {
 
 // Array that will hold the links to all the trailers
 let trailers = [];
+let movies = [];
 
 
 // Play the previous trailer
