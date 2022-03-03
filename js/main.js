@@ -1,3 +1,5 @@
+
+
 // Event listener to handle clicks on a tag
 document.querySelector('body').addEventListener('click', function (event) {
 
@@ -51,7 +53,8 @@ async function router() {
   // /account ska vara login
   if (route === "/partials/account.html") {
     accountMain();
-  } 
+    
+  }
 
 }
 
