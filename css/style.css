@@ -61,6 +61,33 @@ main article {
  
 }
 
+#canvas{
+  width: 400px;
+  height: 240px;
+}
+.container {
+  background: black;
+  display: inline-block;
+  border: 5px solid black;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(5, 80px);
+  grid-template-rows: repeat(3, 80px);
+  grid-gap: 5px;
+}
+
+.cell {
+   /* center the cell content */
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  font-family: Arial;
+  font-size: 3rem;
+  font-weight: bold;
+  background: white;
+}
 .moviestable {
   margin-left: auto;
   margin-right: auto;
