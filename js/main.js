@@ -1,4 +1,4 @@
-
+import {accountMain} from './account.js'
 
 // Event listener to handle clicks on a tag
 document.querySelector('body').addEventListener('click', function (event) {
@@ -49,8 +49,6 @@ async function router() {
   // replace the content of the main element
   document.querySelector('main').innerHTML = content;
 
-
-  // /account ska vara login
   if (route === "/partials/account.html") {
     accountMain();
     

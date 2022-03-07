@@ -1,4 +1,6 @@
-function accountMain() {
+import {verifyLogin} from './database.js'
+
+export function accountMain() {
 
   if (checkLogin()) {
     displayAccountInfo();
@@ -13,7 +15,7 @@ function accountMain() {
 
 // check of user is logged in
 function checkLogin() {
-  if (window.sessionStorage.getItem("user")) {
+  if (sessionStorage.getItem("user")) {
     console.log("user found")
     return true;
   }
@@ -24,6 +26,8 @@ function checkLogin() {
 
 // shows booking history
 function displayAccountInfo() {
+
+  getBookingHistory(sessionStorage.getItem('user'));
   
 }
 
