@@ -2,6 +2,7 @@ const betterSqlite3 = require('better-sqlite3');
 
 const db = betterSqlite3('../database/moviedb.db');
 
+
 // set directory to hkr-web-dev-cinema,
 //type node database.js in terminal to run code
 
@@ -10,7 +11,14 @@ const db = betterSqlite3('../database/moviedb.db');
 
 let user = null;
 
+// get booking history from a specific user
+function getBookingHistory(username) {
+  let stmt = db.prepare("SELECT * FROM bookingsxshowings WHERE accounts_username = '" + username + "' ORDER BY start_time DESC");
+  let bookings = stmt.all();
 
+  console.log(bookings);
+  
+}
 
 function getMovieLinks() {
   let stmt = db.prepare("SELECT link FROM movies");
@@ -38,9 +46,9 @@ function getMovieLinks() {
   
 }
 
+getBookingHistory('chrille');
 
-
-testExamples();
+//testExamples();
 
 //getMovieLinks();
 
