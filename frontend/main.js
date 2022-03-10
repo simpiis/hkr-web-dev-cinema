@@ -50,7 +50,7 @@ async function router() {
   document.querySelector('main').innerHTML = content;
 
   if (route === "/partials/account.html") {
-    accountMain();
+    startReg();
     
   }
 

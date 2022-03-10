@@ -112,3 +112,27 @@ main article {
   text-align: center;
   justify-content: center;
 }
+
+form {
+  margin-bottom: 100px;
+  max-width: 500px;
+}
+
+input[type="text"], input[type="password"], input[type="email"] {
+  width: 340px;
+}
+
+
+label {
+  display: block;
+  margin-bottom: 12px;
+}
+
+label span {
+  display: inline-block;
+  width: 150px;
+}
+
+input[type="submit"] {
+  float: right;
+}
