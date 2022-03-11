@@ -59,7 +59,14 @@ module.exports = function setupRESTapi(app, databaseConnection) {
 
     res.json(bookings);
 
+  });
 
+    app.get('/api/trailers', (req, res) => {
+
+    let stmt = db.prepare("SELECT link FROM movies");
+    let trailers = stmt.all(req.params);
+
+    res.json(trailers);
 
   });
 
