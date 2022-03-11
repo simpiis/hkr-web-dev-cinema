@@ -52,14 +52,14 @@ module.exports = function setupRESTapi(app, databaseConnection) {
     res.json(tablesAndViews);
   });
 
+  
+  // COMMANDS HERE
   app.get('/api/bookings/:id', (req, res) => {
 
     let stmt = db.prepare("SELECT * FROM bookingsxshowings WHERE accounts_username = :id ORDER BY start_time DESC");
     let bookings = stmt.all(req.params);
 
     res.json(bookings);
-
-
 
   });
 
