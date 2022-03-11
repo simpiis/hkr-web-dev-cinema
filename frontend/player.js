@@ -6,11 +6,22 @@ firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
 var player;
 
-var playlist = loadArr();
+var playlist = [];
+loadArr();
 
-function loadArr() {
-  return ['5zdBG-iGfes', 'pGi3Bgn7U5U', '2Rxoz13Bthc'];
+async function loadArr() {
+  let url = 'http://localhost:3000/api/trailers';
+
+  const response = await fetch(url);
+  const data = await response.json();
+  return data.map(el => el.link);
 }
+
+(async () => {
+  const arr = await loadArr();
+  console.log(arr);
+  playlist.push(arr);
+})();
 
 function onYouTubeIframeAPIReady() {
     player = new YT.Player('trailerPlayer', {
@@ -18,7 +29,7 @@ function onYouTubeIframeAPIReady() {
         width: '640',
 
         playerVars: {
-              playlist: playlist.join(','),
+            playlist: playlist.join(','),
             'autoplay': 1,
         },
 
