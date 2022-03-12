@@ -136,3 +136,11 @@ label span {
 input[type="submit"] {
   float: right;
 }
+
+.buttons{
+  display: none;
+}
+
+.booking-history-div {
+  display: none;
+}
