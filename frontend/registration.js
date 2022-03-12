@@ -9,7 +9,7 @@ function createRegistrationForm() {
         <span>Password:</span><input name="password" type="password">
       </label>
       <label>
-        <span>Repeat password:</span><input name="passwordRepeated" type="password">
+        <span>Repeat password:</span><input name="repeatPassword" type="password">
       </label>
       <input type="submit" value="Register">
     </form>
@@ -17,9 +17,15 @@ function createRegistrationForm() {
 }
 
 
-function startReg() {
+async function startReg() {
+  document.getElementById('buttons').style.display = 'none';
   document.getElementById('registration').innerHTML = createRegistrationForm();
-  document.getElementById('form[name="registration"]').addEventListener('submit', (event) => {
+  document.getElementById('registration').style.display = 'inline';
+  document.getElementById('registration').addEventListener('submit', async (event) => {
+
+    if (event.target.closest('form[name="registration]')) { return; }
+    
+
     event.preventDefault();
 
     let fElements = document.forms.registration.elements;
@@ -33,8 +39,37 @@ function startReg() {
       reqBody[element.name] = element.value;
     }
 
-    console.log(reqBody);
+    if (reqBody.password !== reqBody.repeatPassword) {
+      alert('Password mismatch');
+      return;
+    }
+
+    delete reqBody.repeatPassword;
+
+
+    let result = {};
+
+    try {
+      result = await (await fetch('/api/accounts', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(reqBody)
+      })).json();
+    } catch (ignore) { }
+    
+
+    if (!result.changes) {
+      alert("technical issues");
+      return;
+    }
+  
+    alert("you are now a member");
+
+    document.getElementById('buttons').style.display = 'inline';
+    document.getElementById('registration').style.display = 'none';
 
 
   });
+  
+  
 }
