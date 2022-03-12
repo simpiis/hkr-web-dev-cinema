@@ -54,6 +54,10 @@ async function router() {
     
   }
 
+  if (route == "/partials/start.html") {
+    onYouTubeIframeAPIReady();
+  }
+
 }
 
 router();
