@@ -1,5 +1,7 @@
 // Import/require the password encryptor
 const passwordEncryptor = require('./passwordEncryptor');
+const session = require('express-session');
+const store = require('better-express-store');
 
 // Which table stores user data and name of password column?
 const userTable = 'customers';
@@ -35,6 +37,14 @@ function runQuery(res, parameters, sqlForPreparedStatement, onlyOne = false) {
 // Export the function setupRESTapi as a Node.js module
 module.exports = function setupRESTapi(app, databaseConnection) {
 
+  app.use(session({
+    secret: 'ThomasFrankIsVeryCool',
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: 'auto' },
+    store: store({ dbPath: './database/moviedb.db' })
+  }));
+
   // Store the database connection in the global variable db
   db = databaseConnection;
 
@@ -60,6 +70,46 @@ module.exports = function setupRESTapi(app, databaseConnection) {
     res.json(bookings);
 
   });
+
+  //sign the user in
+  app.post('/api/login', (req, res) => {
+    
+    req.body[passwordField] =
+      passwordEncryptor(req.body[passwordField]);
+    
+    let stmt = db.prepare(`
+      SELECT * FROM accounts
+      WHERE username = :username AND password = :password
+    `);
+    
+    let result = stmt.all(req.body)[0] || { _error: 'No such user.' };
+    
+    delete result.password;
+   
+    if (!result._error) {
+      req.session.user = result;
+    }
+    
+    res.json(result);
+  });
+
+  // check if logged in
+  app.get('api/login', (req, res) => {
+    res.json(req.session.user || { _error: 'Not logged in' });
+  });
+  
+  // create new account
+  app.post('api/accounts', (req, res) => {
+    req.body[passwordField] = passwordEncryptor(req.body[passwordField]);
+    let stmt = db.prepare('api/accounts', (req, res) => {
+      let result = stmt.all(req.body)[0] || { _error: 'User already exists' }
+      delete result.password;
+      res.json(result);
+    });
+
+  });
+
+
 
     app.get('/api/trailers', (req, res) => {
 
