@@ -126,5 +126,4 @@ seats --- amount of seats in the room, currently does not hold any relevant info
 columns in accounts table
 username --- primary key, varchar
 password --- varchar, is not encrypted in any way
-booking_history --- String, list of IDs from showings
 */
