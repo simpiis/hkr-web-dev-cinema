@@ -32,6 +32,8 @@ function makeMenuChoiceActive(route) {
   }
 }
 
+let doOnce = false;
+
 async function router() {
   let route = location.pathname;
   makeMenuChoiceActive(route);
@@ -50,7 +52,13 @@ async function router() {
   document.querySelector('main').innerHTML = content;
 
   if (route === "/partials/account.html") {
-    startReg();
+    //getLoggedIn();
+
+    if (!doOnce) {
+      doOnce = true;
+      assignRegister();
+      assignSignIn();
+    }
     
   }
 
