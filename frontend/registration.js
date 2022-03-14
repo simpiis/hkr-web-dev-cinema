@@ -19,12 +19,18 @@ function createRegistrationForm() {
 
 async function startReg() {
   document.getElementById('buttons').style.display = 'none';
-  document.getElementById('registration').innerHTML = createRegistrationForm();
-  document.getElementById('registration').style.display = 'inline';
-  document.getElementById('registration').addEventListener('submit', async (event) => {
+  document.getElementById('registration-div').innerHTML = createRegistrationForm();
+  document.getElementById('registration-div').style.display = 'inline';
+  
+}
+
+
+function assignRegister() {
+  console.log("startAccTest")
+  document.getElementById('registration-div').addEventListener('submit', async (event) => {
 
     if (event.target.closest('form[name="registration]')) { return; }
-    
+
 
     event.preventDefault();
 
@@ -56,20 +62,19 @@ async function startReg() {
         body: JSON.stringify(reqBody)
       })).json();
     } catch (ignore) { }
-    
+
 
     if (!result.changes) {
       alert("technical issues");
       return;
     }
-  
+
     alert("you are now a member");
 
     document.getElementById('buttons').style.display = 'inline';
-    document.getElementById('registration').style.display = 'none';
-
+    document.getElementById('registration-div').style.display = 'none';
 
   });
-  
-  
+
+
 }
