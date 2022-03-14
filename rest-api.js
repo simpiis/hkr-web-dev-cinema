@@ -4,7 +4,7 @@ const session = require('express-session');
 const store = require('better-express-store');
 
 // Which table stores user data and name of password column?
-const userTable = 'customers';
+const userTable = 'accounts';
 const passwordField = 'password';
 
 // Global variable for our database connection
@@ -97,17 +97,6 @@ module.exports = function setupRESTapi(app, databaseConnection) {
   app.get('api/login', (req, res) => {
     res.json(req.session.user || { _error: 'Not logged in' });
   });
-  
-  // create new account
-  app.post('api/accounts', (req, res) => {
-    req.body[passwordField] = passwordEncryptor(req.body[passwordField]);
-    let stmt = db.prepare('api/accounts', (req, res) => {
-      let result = stmt.all(req.body)[0] || { _error: 'User already exists' }
-      delete result.password;
-      res.json(result);
-    });
-
-  });
 
 
 
@@ -122,6 +111,7 @@ module.exports = function setupRESTapi(app, databaseConnection) {
 
   // Loop through all tables and views and create REST-routes for them
   for (let { name, type } of tablesAndViews) {
+    
 
     // Create a route to get (read) all posts from a table
     app.get('/api/' + name, (req, res) => {
