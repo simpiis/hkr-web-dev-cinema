@@ -66,6 +66,10 @@ async function router() {
     onYouTubeIframeAPIReady();
   }
 
+  if (route == "/partials/movies.html") {
+    makeTable();
+  }
+
 }
 
 router();
