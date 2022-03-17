@@ -44,7 +44,28 @@ main article {
   padding: 20px;
 }
 
-
+/* part of movie seat-booking */
+.square{
+  background: rgb(2, 216, 2);
+  color:#fff;
+  width:100px;
+  height:100px;
+  float:left;
+  border:1px solid black;
+}
+/*
+h1{
+    height: 50%; 
+    width:100%;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}*/
+#containerSeats{
+  width: 510px;
+  height: 306px;
+  border:2px solid black;
+} /* end of movie seat-booking*/
 
 #canvas{
   width: 400px;
@@ -55,7 +76,6 @@ main article {
   display: inline-block;
   border: 5px solid black;
 }
-
 .grid {
   display: grid;
   grid-template-columns: repeat(5, 80px);
