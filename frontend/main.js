@@ -59,7 +59,7 @@ async function router() {
       assignRegister();
       assignSignIn();
     }
-    
+
   }
 
   if (route == "/partials/start.html") {
@@ -70,6 +70,9 @@ async function router() {
     makeTable();
   }
 
+  if (route == "/partials/booking.html") {
+    loadSeats();
+  }
 }
 
 router();
