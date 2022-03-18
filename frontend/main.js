@@ -52,7 +52,6 @@ async function router() {
   document.querySelector('main').innerHTML = content;
 
   if (route === "/partials/account.html") {
-    //getLoggedIn();
 
     if (!doOnce) {
       doOnce = true;
@@ -61,12 +60,20 @@ async function router() {
     }
     getLoggedIn();
     
+
   }
 
   if (route == "/partials/start.html") {
     onYouTubeIframeAPIReady();
   }
 
+  if (route == "/partials/movies.html") {
+    makeTable();
+  }
+
+  if (route == "/partials/booking.html") {
+    loadSeats();
+  }
 }
 
 router();

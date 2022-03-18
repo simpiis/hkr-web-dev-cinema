@@ -8,6 +8,9 @@ var player;
 
 var playlist = [];
 loadArr();
+for (const a of playlist) {
+  console.log(a);
+}
 
 async function loadArr() {
   let url = 'http://localhost:3000/api/trailers';
@@ -19,8 +22,7 @@ async function loadArr() {
 
 (async () => {
   const arr = await loadArr();
-  console.log(arr);
-  playlist.push(arr);
+  playlist.push(...arr);
 })();
 
 function onYouTubeIframeAPIReady() {
