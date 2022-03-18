@@ -94,7 +94,7 @@ module.exports = function setupRESTapi(app, databaseConnection) {
   });
 
   // check if logged in
-  app.get('api/login', (req, res) => {
+  app.get('/api/login', (req, res) => {
     res.json(req.session.user || { _error: 'Not logged in' });
   });
 
@@ -107,6 +107,14 @@ module.exports = function setupRESTapi(app, databaseConnection) {
 
     res.json(trailers);
 
+    });
+  
+  app.get('/api/history/:id', (req, res) => {
+    let stmt = db.prepare(`
+    SELECT * FROM bookingsxshowings WHERE accounts_username = :id ORDER BY start_time DESC
+    `)
+    let history = stmt.all(req.params);
+    res.json(history);
   });
 
   // Loop through all tables and views and create REST-routes for them
