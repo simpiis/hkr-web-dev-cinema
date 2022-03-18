@@ -12,6 +12,7 @@ async function getLoggedIn() {
     renderHistory(user);
     document.getElementById('buttons').style.display = 'none';
     document.getElementById('booking-history-div').style.display = 'inline'
+    console.log(user);
   }
 }
 
@@ -25,6 +26,14 @@ async function renderHistory(user) {
     bookingHistory = await (await fetch('/api/bookings/' + user.username)).json();
   } catch (ignore) { }
   
+  console.log(user.username);
   console.log(bookingHistory);
+
+  for (let item of bookingHistory) {
+    html += `
+    <p> ${item}   </p>
+    `
+  }
+  doc.innerHTML = html;
 
 }
