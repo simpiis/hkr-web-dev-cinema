@@ -109,6 +109,7 @@ module.exports = function setupRESTapi(app, databaseConnection) {
 
     });
   
+  //get the booking and the showing information for every item in the user's booking history
   app.get('/api/history/:id', (req, res) => {
     let stmt = db.prepare(`
     SELECT * FROM bookingsxshowings WHERE accounts_username = :id ORDER BY start_time DESC
