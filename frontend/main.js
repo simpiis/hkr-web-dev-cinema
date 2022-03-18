@@ -59,6 +59,7 @@ async function router() {
       assignRegister();
       assignSignIn();
     }
+    getLoggedIn();
     
   }
 
