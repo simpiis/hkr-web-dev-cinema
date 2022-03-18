@@ -31,7 +31,7 @@ async function renderHistory(user) {
 
   for (let item of bookingHistory) {
     html += `
-    <p> ${item}   </p>
+    <p> ${item.movie_title}  ${item.start_time}  ${item.end_time}  ${item.room_name}   </p>
     `
   }
   doc.innerHTML = html;
