@@ -1,21 +1,23 @@
 const movies = [];
 
 function makeTable() {
-    resetTable();
     const x = document.getElementById("mySelect").value;
+    const z = document.getElementById("dateIn").value;
+
+    resetTable();
     loadMov();
 
     let table = document.querySelector(".moviestable");
 
     for (const obj of movies) {
-        if (x == 'all') {
+        if (x == 'all' && obj.start_time.includes(z)) {
             const tr = table.insertRow();
             tr.insertCell().textContent = obj.title;
             tr.insertCell().textContent = obj.length;
             tr.insertCell().textContent = obj.rating;
             tr.insertCell().textContent = obj.start_time;
         }
-        if (x == 'pg-13' && obj.rating == 'PG-13') {
+        if ((x == 'pg-13' && obj.rating == 'PG-13') && obj.start_time.includes(z)) {
             const tr = table.insertRow();
             tr.insertCell().textContent = obj.title;
             tr.insertCell().textContent = obj.length;
@@ -23,7 +25,7 @@ function makeTable() {
             tr.insertCell().textContent = obj.start_time;
         }
 
-        if (x == 'r' && obj.rating == 'R') {
+        if ((x == 'r' && obj.rating == 'R') && obj.start_time.includes(z)) {
             const tr = table.insertRow();
             tr.insertCell().textContent = obj.title;
             tr.insertCell().textContent = obj.length;
