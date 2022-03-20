@@ -1,10 +1,25 @@
 <article>
+
+    <div class="agefilter">
+        <p>Filter by age</p>
+        <select id="mySelect" onchange="makeTable()">
+            <option value="all">All</option>
+            <option value="pg-13">PG-13</option>
+            <option value="r">R</option>
+        </select>
+    </div>
+
+    <div class="datefilter">
+        <p>Filter by date</p>
+        <input type="text" id="fname" name="fname"><br><br>
+    </div>
+
     <table class="moviestable">
         <tr>
             <th>Title</th>
             <th>Length</th>
-            <th onclick="sortByRating()">Rating</th>
-            <th onclick="sortByRating()">Date</th>
+            <th>Rating</th>
+            <th>Date</th>
         </tr>
     </table>
 </article>
