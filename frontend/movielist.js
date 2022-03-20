@@ -11,6 +11,7 @@ function makeTable() {
         tr.insertCell().textContent = obj.title;
         tr.insertCell().textContent = obj.length;
         tr.insertCell().textContent = obj.rating;
+        tr.insertCell().textContent = obj.start_time;
     }
 
 }
@@ -21,7 +22,7 @@ function sortByRating() {
 
 
 async function loadMov() {
-    let url = 'http://localhost:3000/api/movies';
+    let url = 'http://localhost:3000/api/movielist';
 
     const response = await fetch(url);
     const data = await response.json();
