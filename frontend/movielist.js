@@ -3,34 +3,63 @@ const movies = [];
 function makeTable() {
     const x = document.getElementById("mySelect").value;
     const z = document.getElementById("dateIn").value;
-
     resetTable();
     loadMov();
 
     let table = document.querySelector(".moviestable");
 
     for (const obj of movies) {
-        if (x == 'all' && obj.start_time.includes(z)) {
-            const tr = table.insertRow();
-            tr.insertCell().textContent = obj.title;
-            tr.insertCell().textContent = obj.length;
-            tr.insertCell().textContent = obj.rating;
-            tr.insertCell().textContent = obj.start_time;
-        }
-        if ((x == 'pg-13' && obj.rating == 'PG-13') && obj.start_time.includes(z)) {
-            const tr = table.insertRow();
-            tr.insertCell().textContent = obj.title;
-            tr.insertCell().textContent = obj.length;
-            tr.insertCell().textContent = obj.rating;
-            tr.insertCell().textContent = obj.start_time;
-        }
 
-        if ((x == 'r' && obj.rating == 'R') && obj.start_time.includes(z)) {
-            const tr = table.insertRow();
-            tr.insertCell().textContent = obj.title;
-            tr.insertCell().textContent = obj.length;
-            tr.insertCell().textContent = obj.rating;
-            tr.insertCell().textContent = obj.start_time;
+        const dateSubstring = obj.start_time.substring(0, 10);
+
+        //If the date filter textfield is empty, just apply the normal filters
+        if (!z) {
+            if (x == 'all') {
+                const tr = table.insertRow();
+                tr.insertCell().textContent = obj.title;
+                tr.insertCell().textContent = obj.length;
+                tr.insertCell().textContent = obj.rating;
+                tr.insertCell().textContent = obj.start_time;
+            }
+            if ((x == 'pg-13' && obj.rating == 'PG-13')) {
+                const tr = table.insertRow();
+                tr.insertCell().textContent = obj.title;
+                tr.insertCell().textContent = obj.length;
+                tr.insertCell().textContent = obj.rating;
+                tr.insertCell().textContent = obj.start_time;
+            }
+
+            if ((x == 'r' && obj.rating == 'R')) {
+                const tr = table.insertRow();
+                tr.insertCell().textContent = obj.title;
+                tr.insertCell().textContent = obj.length;
+                tr.insertCell().textContent = obj.rating;
+                tr.insertCell().textContent = obj.start_time;
+            }
+            //If date textfield has text in it, apply the normal filters AND the date filter
+        } else {
+            if ((x == 'all') && z == dateSubstring) {
+                const tr = table.insertRow();
+                tr.insertCell().textContent = obj.title;
+                tr.insertCell().textContent = obj.length;
+                tr.insertCell().textContent = obj.rating;
+                tr.insertCell().textContent = obj.start_time;
+            }
+            if ((x == 'pg-13' && obj.rating == 'PG-13') && z == dateSubstring) {
+                const tr = table.insertRow();
+                tr.insertCell().textContent = obj.title;
+                tr.insertCell().textContent = obj.length;
+                tr.insertCell().textContent = obj.rating;
+                tr.insertCell().textContent = obj.start_time;
+            }
+
+            if ((x == 'r' && obj.rating == 'R') && z == dateSubstring) {
+                const tr = table.insertRow();
+                tr.insertCell().textContent = obj.title;
+                tr.insertCell().textContent = obj.length;
+                tr.insertCell().textContent = obj.rating;
+                tr.insertCell().textContent = obj.start_time;
+            }
         }
     }
 
