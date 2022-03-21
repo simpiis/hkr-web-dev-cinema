@@ -171,6 +171,10 @@ input[type="submit"] {
     margin: 4px 2px;
 }
 
+.accButtons:hover {
+    background-color: rgb(221, 80, 115);
+}
+
 #buttons {
     text-align: center;
 }
