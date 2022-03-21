@@ -92,6 +92,7 @@ h1{
 #confirmButton:hover {
     background-color: green;
     color: white;
+    cursor: pointer;
 }
 
 
@@ -173,6 +174,7 @@ input[type="submit"] {
 
 .accButtons:hover {
     background-color: rgb(221, 80, 115);
+    cursor: pointer;
 }
 
 #buttons {
@@ -193,6 +195,7 @@ td {
 
 tr:hover {
     background: lightgreen;
+    cursor: pointer;
 }
 
 tr:nth-child(even):hover {
