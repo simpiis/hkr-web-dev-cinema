@@ -70,6 +70,15 @@ module.exports = function setupRESTapi(app, databaseConnection) {
 
     });
 
+    app.get('/api/danne/:id', (req, res) => {
+
+        let stmt = db.prepare("SELECT * FROM bookingsxshowings WHERE movie_title = :id");
+        let bookings = stmt.all(req.params);
+
+        res.json(bookings);
+
+    });
+
     //sign the user in
     app.post('/api/login', (req, res) => {
 
@@ -183,7 +192,7 @@ module.exports = function setupRESTapi(app, databaseConnection) {
                     passwordEncryptor(req.body[passwordField]);
             }
 
-            runQuery(res, {...req.body, ...req.params }, `
+            runQuery(res, { ...req.body, ...req.params }, `
         UPDATE ${name}
         SET ${Object.keys(req.body).map(x => x + ' = :' + x)}
         WHERE id = :id

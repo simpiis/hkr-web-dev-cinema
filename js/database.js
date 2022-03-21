@@ -17,7 +17,7 @@ function getBookingHistory(username) {
   let bookings = stmt.all();
 
   console.log(bookings);
-  
+
 }
 
 function getMovieLinks() {
@@ -27,23 +27,23 @@ function getMovieLinks() {
   console.log(links);
 }
 
- function verifyLogin(username, password) {
+function verifyLogin(username, password) {
   let stmt = db.prepare("SELECT * FROM accounts WHERE username = '" + username + "' AND password = '" + password + "'");
   user = stmt.all();
 
   console.log(user);
 
-  if (user.length !=0) {
+  if (user.length != 0) {
     sessionStorage.setItem("user", user[0].username);
 
     console.log("logged in");
 
-    
+
   } else {
     console.log("invalid credentials")
-    
+
   }
-  
+
 }
 
 getBookingHistory('chrille');
@@ -59,15 +59,15 @@ getBookingHistory('chrille');
 
 function testExamples() {
   // select statement -- get everything about every movie
-/*  let stmtSelectAllMovies = db.prepare(`
-SELECT * FROM movies
-`)
-
-  let movies = stmtSelectAllMovies.all();
-
-  console.log(movies);
-
-  */
+  /*  let stmtSelectAllMovies = db.prepare(`
+  SELECT * FROM movies
+  `)
+  
+    let movies = stmtSelectAllMovies.all();
+  
+    console.log(movies);
+  
+    */
 
 
 
@@ -83,16 +83,13 @@ SELECT * FROM movies
 
   let seatInfo = seats[0].seat_list;
 
-
   console.log(seatInfo);
-  seatInfo=markSeat(seatInfo,2,'t');
+  seatInfo = markSeat(seatInfo, 2, 't');
   console.log(seatInfo);
 
-
-  
 }
 
-function markSeat(seatInfo,index,value) {
+function markSeat(seatInfo, index, value) {
   seatInfo = seatInfo.substr(0, index) + value + seatInfo.substr(index + 1);
 
   return seatInfo
