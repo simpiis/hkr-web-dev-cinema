@@ -119,7 +119,7 @@ module.exports = function setupRESTapi(app, databaseConnection) {
 
     app.get('/api/movielist', (req, res) => {
 
-        const query = "SELECT title, length, rating, start_time FROM movies INNER JOIN showings ON movies.title = showings.movie_title";
+        const query = "SELECT title, length, rating, synopsis, start_time FROM movies INNER JOIN showings ON movies.title = showings.movie_title";
         let stmt = db.prepare(query);
         let list = stmt.all(req.params);
 
@@ -192,7 +192,7 @@ module.exports = function setupRESTapi(app, databaseConnection) {
                     passwordEncryptor(req.body[passwordField]);
             }
 
-            runQuery(res, { ...req.body, ...req.params }, `
+            runQuery(res, {...req.body, ...req.params }, `
         UPDATE ${name}
         SET ${Object.keys(req.body).map(x => x + ' = :' + x)}
         WHERE id = :id
