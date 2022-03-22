@@ -20,6 +20,10 @@ function makeTable() {
                 tr.insertCell().textContent = obj.length;
                 tr.insertCell().textContent = obj.rating;
                 tr.insertCell().textContent = obj.start_time;
+                tr.addEventListener("click", () => {
+                    localStorage.setItem('movieToBook', obj);
+                    location.href = '/movie.html';
+                });
             }
             if ((x == 'pg-13' && obj.rating == 'PG-13')) {
                 const tr = table.insertRow();
@@ -27,6 +31,10 @@ function makeTable() {
                 tr.insertCell().textContent = obj.length;
                 tr.insertCell().textContent = obj.rating;
                 tr.insertCell().textContent = obj.start_time;
+                tr.addEventListener("click", () => {
+                    localStorage.setItem('movieToBook', obj);
+                    location.href = '/movie.html';
+                });
             }
 
             if ((x == 'r' && obj.rating == 'R')) {
@@ -35,6 +43,10 @@ function makeTable() {
                 tr.insertCell().textContent = obj.length;
                 tr.insertCell().textContent = obj.rating;
                 tr.insertCell().textContent = obj.start_time;
+                tr.addEventListener("click", () => {
+                    localStorage.setItem('movieToBook', obj);
+                    location.href = '/movie.html';
+                });
             }
             //If date textfield has text in it, apply the normal filters AND the date filter
         } else {
@@ -44,6 +56,10 @@ function makeTable() {
                 tr.insertCell().textContent = obj.length;
                 tr.insertCell().textContent = obj.rating;
                 tr.insertCell().textContent = obj.start_time;
+                tr.addEventListener("click", () => {
+                    localStorage.setItem('movieToBook', obj);
+                    location.href = '/movie.html';
+                });
             }
             if ((x == 'pg-13' && obj.rating == 'PG-13') && z == dateSubstring) {
                 const tr = table.insertRow();
@@ -51,6 +67,10 @@ function makeTable() {
                 tr.insertCell().textContent = obj.length;
                 tr.insertCell().textContent = obj.rating;
                 tr.insertCell().textContent = obj.start_time;
+                tr.addEventListener("click", () => {
+                    localStorage.setItem('movieToBook', obj);
+                    location.href = '/movie.html';
+                });
             }
 
             if ((x == 'r' && obj.rating == 'R') && z == dateSubstring) {
@@ -59,12 +79,30 @@ function makeTable() {
                 tr.insertCell().textContent = obj.length;
                 tr.insertCell().textContent = obj.rating;
                 tr.insertCell().textContent = obj.start_time;
+                tr.addEventListener("click", () => {
+                    localStorage.setItem('movieToBook', obj);
+                    location.href = '/movie.html';
+                });
             }
         }
+
     }
 
 }
 
+
+let movieTitleToBook;
+let movieDateToBook;
+
+function goToBooking(rowMovieTitle, rowMovieDate) {
+    window.location.href = '/partials/booking.html';
+
+    movieTitleToBook = rowMovieTitle;
+    movieDateToBook = rowMovieDate;
+
+    // loadSeats();
+
+}
 
 function resetTable() {
     for (const tr of document.querySelectorAll(".moviestable tr")) {
