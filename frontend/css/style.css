@@ -1,58 +1,67 @@
 body {
-  margin: 0;
-  background-color: rgba(79, 89, 221, 0.623);
-  font-size: 17px;
-  line-height: 135%;
-  /* part of the sticky footer solution */
-  display: flex;
-  min-height: 100vh;
-  flex-direction: column;
+    margin: 0;
+    background-color: rgba(79, 89, 221, 0.623);
+    font-size: 17px;
+    line-height: 135%;
+    /* part of the sticky footer solution */
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
 }
+
 nav a {
-  color: rgb(218, 214, 214);
-  padding: 0 10px;
-  text-decoration: none;
+    color: rgb(218, 214, 214);
+    padding: 0 10px;
+    text-decoration: none;
 }
-h1 {  
-  color: rgb(143, 12, 12);
+
+h1 {
+    color: rgb(143, 12, 12);
 }
+
 nav a {
-  color: rgb(218, 214, 214);
-  padding: 0 10px;
-  text-decoration: none;
+    color: rgb(218, 214, 214);
+    padding: 0 10px;
+    text-decoration: none;
 }
 
 nav .active {
-  color: white;
+    color: white;
 }
+
 header {
-  background-color: rgb(190, 67, 98);
-  padding: 20px;
-  margin-bottom: 30px;
+    background-color: rgb(190, 67, 98);
+    padding: 20px;
+    margin-bottom: 30px;
 }
+
 footer {
-  text-align: center;
-  margin-top: 30px;
-  color: white;
-  padding: 20px;
-  background-color: rgb(143, 12, 12);
+    text-align: center;
+    margin-top: 30px;
+    color: white;
+    padding: 20px;
+    background-color: rgb(143, 12, 12);
 }
 
 main article {
-  margin: 0 auto;
-  max-width: 650px;
-  padding: 20px;
+    margin: 0 auto;
+    max-width: 650px;
+    padding: 20px;
 }
 
+
 /* part of movie seat-booking */
-.square{
-  background: rgb(2, 216, 2);
-  color:#fff;
-  width:100px;
-  height:100px;
-  float:left;
-  border:1px solid black;
+
+.square {
+    /* background: green; */
+    color: #fff;
+    width: 100px;
+    height: 100px;
+    float: left;
+    border: 1px solid black;
 }
+
+
 /*
 h1{
     height: 50%; 
@@ -61,86 +70,146 @@ h1{
     align-items: center;
     justify-content: center;
 }*/
-#containerSeats{
-  width: 510px;
-  height: 306px;
-  border:2px solid black;
-} /* end of movie seat-booking*/
+
+#containerSeats {
+    width: 510px;
+    height: 306px;
+    border: 2px solid black;
+}
+
+#confirmButton {
+    margin: 1px;
+    background-color: #555555;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
+#confirmButton:hover {
+    background-color: green;
+    color: white;
+    cursor: pointer;
+}
 
 
+/* end of movie seat-booking*/
 
 .cell {
-   /* center the cell content */
-  justify-content: center;
-  align-items: center;
-  display: flex;
-  font-family: Arial;
-  font-size: 3rem;
-  font-weight: bold;
-  background: white;
+    /* center the cell content */
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    font-family: Arial;
+    font-size: 3rem;
+    font-weight: bold;
+    background: white;
 }
+
 .moviestable {
-  margin-left: auto;
-  margin-right: auto;
-  font-size:25px;
-  text-align:center;
-  border: 1px solid white n;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 25px;
+    text-align: center;
+    border: 1px solid white n;
 }
 
 .bookButton {
-  background-color: rgb(190, 67, 98);
-  border: none;
-  color: white;
-  padding: 20px 40px;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer;
-  float:right;
+    background-color: rgb(190, 67, 98);
+    border: none;
+    color: white;
+    padding: 20px 40px;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    float: right;
 }
 
 .account-content {
-  text-align: center;
-  justify-content: center;
+    text-align: center;
+    justify-content: center;
 }
 
 form {
-  margin-bottom: 100px;
-  max-width: 500px;
+    margin-bottom: 100px;
+    max-width: 500px;
 }
 
-input[type="text"], input[type="password"], input[type="email"] {
-  width: 340px;
+input[type="text"],
+input[type="password"],
+input[type="email"] {
+    width: 340px;
 }
-
 
 label {
-  display: block;
-  margin-bottom: 12px;
+    display: block;
+    margin-bottom: 12px;
 }
 
 label span {
-  display: inline-block;
-  width: 150px;
+    display: inline-block;
+    width: 150px;
 }
 
 input[type="submit"] {
-  float: right;
+    float: right;
 }
 
 .booking-history-div {
-  display: none;
+    display: none;
 }
 
 .accButtons {
-background-color: rgb(190, 67, 98);
-  border: none;
-  color: white;
-  padding: 20px 40px;
-  font-size: 16px;
-  margin: 4px 2px;
-
+    background-color: rgb(190, 67, 98);
+    border: none;
+    color: white;
+    padding: 20px 40px;
+    font-size: 16px;
+    margin: 4px 2px;
 }
-#buttons{
-  text-align: center;
+
+.accButtons:hover {
+    background-color: rgb(221, 80, 115);
+    cursor: pointer;
+}
+
+#buttons {
+    text-align: center;
+}
+
+table {
+    width: 100%;
+    border-spacing: 0;
+    border: 1px solid rgb(190, 67, 98);
+}
+
+th,
+td {
+    padding: 16px;
+    text-align: left;
+}
+
+tr:hover {
+    background: lightgreen;
+    cursor: pointer;
+}
+
+tr:nth-child(even):hover {
+    background: lightgreen;
+}
+
+tr:nth-child(even) {
+    background-color: rgb(190, 67, 98);
+}
+
+.agefilter {
+    float: left;
+}
+
+.datefilter {
+    float: right;
 }

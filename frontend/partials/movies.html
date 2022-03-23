@@ -1,12 +1,27 @@
 <article>
-  <table class="moviestable">
-    <tr>
-      <th>Title</th>
-      <th>Length</th>
-      <th>Rating</th>
-      <th>Booking</th>
-    </tr>
-  </table>
-</article>
 
-<script src="./movielist.js"></script>
+    <div class="agefilter">
+        <p>Filter by age</p>
+        <select id="mySelect" onchange="makeTable()">
+            <option value="all">All</option>
+            <option value="pg-13">PG-13</option>
+            <option value="r">R</option>
+        </select>
+    </div>
+
+    <div class="datefilter">
+        <p>Filter by date (yyyy-mm-ddd)</p>
+        <input type="text" id="dateIn"> <button onclick="makeTable()">Filter</button><br><br>
+    </div>
+
+    <table class="moviestable">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Length</th>
+                <th>Rating</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+    </table>
+</article>

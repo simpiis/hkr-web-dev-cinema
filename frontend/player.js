@@ -6,23 +6,20 @@ firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
 var player;
 
-var playlist = [];
+const playlist = [];
 loadArr();
-for (const a of playlist) {
-  console.log(a);
-}
 
 async function loadArr() {
-  let url = 'http://localhost:3000/api/trailers';
+    const url = 'http://localhost:3000/api/trailers';
 
-  const response = await fetch(url);
-  const data = await response.json();
-  return data.map(el => el.link);
+    const response = await fetch(url);
+    const data = await response.json();
+    return data.map(el => el.link);
 }
 
-(async () => {
-  const arr = await loadArr();
-  playlist.push(...arr);
+(async() => {
+    const arr = await loadArr();
+    playlist.push(...arr);
 })();
 
 function onYouTubeIframeAPIReady() {
