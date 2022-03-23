@@ -127,6 +127,14 @@ module.exports = function setupRESTapi(app, databaseConnection) {
 
     });
 
+    app.get('/api/dannep/:title/:time', (req, res) => {
+        let stmt = db.prepare(`
+    SELECT * FROM showings WHERE movie_title = :title AND start_time = :time
+    `)
+        let showing = stmt.all(req.params);
+        res.json(showing);
+    });
+
     //get the booking and the showing information for every item in the user's booking history
     app.get('/api/history/:id', (req, res) => {
         let stmt = db.prepare(`
@@ -192,7 +200,7 @@ module.exports = function setupRESTapi(app, databaseConnection) {
                     passwordEncryptor(req.body[passwordField]);
             }
 
-            runQuery(res, {...req.body, ...req.params }, `
+            runQuery(res, { ...req.body, ...req.params }, `
         UPDATE ${name}
         SET ${Object.keys(req.body).map(x => x + ' = :' + x)}
         WHERE id = :id
