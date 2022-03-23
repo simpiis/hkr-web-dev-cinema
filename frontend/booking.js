@@ -9,7 +9,7 @@ loadTheInfo();
 
 function loadTheInfo() {
 
-    document.getElementById("detailedTitle").innerHTML = localStorage.getItem("movieTitleToBook");
+    document.getElementById("detailedTitle").innerHTML = localStorage.getItem("movieToBook");
     document.getElementById("detailedSynopsis").innerHTML = localStorage.getItem("movieSynopsisToBook");
     document.getElementById("detailedDate").innerHTML = localStorage.getItem("movieDateToBook");
     document.getElementById("detailedLength").innerHTML = localStorage.getItem("movieLengthToBook");
@@ -87,8 +87,4 @@ async function confirmBooking() {
 }
 async function refreshBooking() {
 
-}
-
-function swag() {
-    alert("due swag")
 }

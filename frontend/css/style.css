@@ -213,3 +213,18 @@ tr:nth-child(even) {
 .datefilter {
     float: right;
 }
+
+#continueToBookingPage {
+    visibility: hidden;
+    display: block;
+    height: 30px;
+    width: 120px;
+    background: lightgreen;
+    border-color: lightgreen;
+    padding: 11px;
+    text-align: center;
+    border-radius: 6px;
+    color: white;
+    font-weight: bold;
+    line-height: 25px;
+}
