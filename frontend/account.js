@@ -4,7 +4,7 @@ async function getLoggedIn() {
 
   if (!user || user._error) {
     document.getElementById('buttons').style.display = 'inline';
-    
+
   } else {
     renderHistory(user);
     document.getElementById('buttons').style.display = 'none';
@@ -22,8 +22,8 @@ async function renderHistory(user) {
   try {
     bookingHistory = await (await fetch('/api/bookings/' + user.username)).json();
   } catch (ignore) { }
-  
-  console.log("booking history: ");
+
+  console.log(user.username);
   console.log(bookingHistory);
   let counter = 0;
 

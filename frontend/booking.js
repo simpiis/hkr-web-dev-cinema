@@ -1,8 +1,6 @@
-//Temporary string to represent seats
-let seats = "fffttfffffftttf";
-
-
-
+let showingsId = {};
+let seats;
+var userSeats = [];
 
 // Loads the information from the movie the customer wants to book by using localstorage.
 loadTheInfo();
@@ -15,9 +13,30 @@ function loadTheInfo() {
     document.getElementById("detailedLength").innerHTML = localStorage.getItem("movieLengthToBook");
     document.getElementById("detailedRating").innerHTML = localStorage.getItem("movieRatingToBook");
 
+
 }
 
-function loadSeats() {
+async function loadSeats() {
+
+    let temp = {};
+    temp["title"] = localStorage.getItem("movieTitleToBook");
+    temp["time"] = localStorage.getItem("movieDateToBook");
+
+
+
+    try {
+        showingsId = await (await fetch(`/api/dannep/${temp.title}/${temp.time}`)).json();
+
+    } catch (ignore) {}
+
+    console.log(showingsId);
+
+    seats = showingsId[0].seat_list;
+
+    /*try {
+        seats = await (await fetch)
+    } catch (ignore) { }*/
+
 
     //Variable to hold the div containerSeats from booking.html
     let cont = document.getElementById("containerSeats");
@@ -52,10 +71,12 @@ function loadSeats() {
             if (this.style.backgroundColor === "green") {
                 this.style.backgroundColor = "yellow";
                 seats = markSeat(seats, i, 't')
+                userSeats[i] = `${i + 1}`;
 
             } else if (this.style.backgroundColor === "yellow") {
                 this.style.backgroundColor = "green";
                 seats = markSeat(seats, i, 'f')
+                userSeats[i] = null;
 
             }
         }
@@ -68,27 +89,47 @@ function markSeat(seatInfo, index, value) {
     return seatInfo
 }
 async function confirmBooking() {
+
+    //Only add elements which are not null/undefined to userSeat array
+    let temp = []
+    let i = 0
+    for (let element of userSeats) {
+        if (element != null || element != undefined) {
+            temp[i] = element
+            i++
+        }
+    }
+    userSeats = temp;
+
     let result = {};
+    showingsId[0].seat_list = seats;
+
+    let user;
+    try {
+        user = await (await fetch('/api/login')).json();
+    } catch (ignore) {}
+
+    //Create an object to hold the booking information
+    let bookingInfo = { userName: user.userName, id: showingsId[0].id, bookedSeats: userSeats.toString() };
 
     try {
         result = await (await fetch('/api/bookings', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(seats)
+            body: JSON.stringify(bookingInfo)
         })).json();
     } catch (ignore) {}
 
-    let danne;
     try {
-        danne = await (await fetch('/api/danne/UNCHARTED')).json();
+        result = await (await fetch('/api/showings', {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(showingsId[0])
+        })).json();
     } catch (ignore) {}
-    console.log(danne);
+
 
 }
 async function refreshBooking() {
 
-}
-
-function swag() {
-    alert("due swag")
 }

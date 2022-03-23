@@ -28,7 +28,8 @@ function makeTable() {
                     localStorage.setItem("movieRatingToBook", obj.rating);
                     localStorage.setItem("movieLengthToBook", obj.length);
 
-                    location.href = '/partials/booking.html';
+
+                    moveOntoBooking();
                 });
             }
             if ((x == 'pg-13' && obj.rating == 'PG-13')) {
@@ -46,7 +47,7 @@ function makeTable() {
                     localStorage.setItem("movieLengthToBook", obj.length);
 
 
-                    location.href = '/partials/booking.html';
+                    moveOntoBooking();
                 });
             }
 
@@ -65,7 +66,7 @@ function makeTable() {
                     localStorage.setItem("movieLengthToBook", obj.length);
 
 
-                    location.href = '/partials/booking.html';
+                    moveOntoBooking();
                 });
             }
             //If date textfield has text in it, apply the normal filters AND the date filter
@@ -78,14 +79,13 @@ function makeTable() {
                 tr.insertCell().textContent = obj.start_time;
                 tr.addEventListener("click", () => {
 
-
                     localStorage.setItem("movieTitleToBook", obj.title);
                     localStorage.setItem("movieSynopsisToBook", obj.synopsis);
                     localStorage.setItem("movieDateToBook", obj.start_time);
                     localStorage.setItem("movieRatingToBook", obj.rating);
                     localStorage.setItem("movieLengthToBook", obj.length);
 
-                    location.href = '/partials/booking.html';
+                    moveOntoBooking();
                 });
             }
             if ((x == 'pg-13' && obj.rating == 'PG-13') && z == dateSubstring) {
@@ -102,7 +102,7 @@ function makeTable() {
                     localStorage.setItem("movieRatingToBook", obj.rating);
                     localStorage.setItem("movieLengthToBook", obj.length);
 
-                    location.href = '/partials/booking.html';
+                    moveOntoBooking();
                 });
             }
 
@@ -113,7 +113,6 @@ function makeTable() {
                 tr.insertCell().textContent = obj.rating;
                 tr.insertCell().textContent = obj.start_time;
                 tr.addEventListener("click", () => {
-
                     localStorage.setItem("movieTitleToBook", obj.title);
                     localStorage.setItem("movieSynopsisToBook", obj.synopsis);
                     localStorage.setItem("movieDateToBook", obj.start_time);
@@ -121,7 +120,8 @@ function makeTable() {
                     localStorage.setItem("movieLengthToBook", obj.length);
 
 
-                    location.href = '/partials/booking.html';
+
+                    moveOntoBooking();
                 });
             }
         }
@@ -130,9 +130,13 @@ function makeTable() {
 
 }
 
+function moveOntoBooking() {
+    document.getElementById("continueToBookingPage").style.visibility = "visible";
+}
+
 function resetTable() {
     for (const tr of document.querySelectorAll(".moviestable tr")) {
-        for (const child of[...tr.children]) {
+        for (const child of [...tr.children]) {
             if (child.tagName !== "TH") {
                 child.remove();
             }
@@ -149,7 +153,7 @@ async function loadMov() {
     return data;
 }
 
-(async() => {
+(async () => {
     const arr = await loadMov();
     movies.push(...arr);
 })();
