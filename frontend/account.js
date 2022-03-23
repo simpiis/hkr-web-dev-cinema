@@ -1,9 +1,6 @@
 async function getLoggedIn() {
-  let user;
-  try {
-    user = await (await fetch('/api/login')).json();
-  }
-  catch (ignore) { }
+  let user = getUser();
+  
 
   if (!user || user._error) {
     document.getElementById('buttons').style.display = 'inline';
@@ -38,4 +35,14 @@ async function renderHistory(user) {
   }
   doc.innerHTML = html;
 
+}
+
+
+async function getUser() {
+  let user;
+  try {
+    user = await (await fetch('/api/login')).json();
+  }
+  catch (ignore) { }
+  return user;
 }
