@@ -1,5 +1,9 @@
 async function getLoggedIn() {
-  let user = getUser();
+  let user;
+  try {
+    user = await (await fetch('/api/login')).json();
+  }
+  catch (ignore) { }
   
 
   if (!user || user._error) {
@@ -37,12 +41,3 @@ async function renderHistory(user) {
 
 }
 
-
-async function getUser() {
-  let user;
-  try {
-    user = await (await fetch('/api/login')).json();
-  }
-  catch (ignore) { }
-  return user;
-}
