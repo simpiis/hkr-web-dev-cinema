@@ -7,7 +7,7 @@ loadTheInfo();
 
 function loadTheInfo() {
 
-    document.getElementById("detailedTitle").innerHTML = localStorage.getItem("movieToBook");
+    document.getElementById("detailedTitle").innerHTML = localStorage.getItem("movieTitleToBook");
     document.getElementById("detailedSynopsis").innerHTML = localStorage.getItem("movieSynopsisToBook");
     document.getElementById("detailedDate").innerHTML = localStorage.getItem("movieDateToBook");
     document.getElementById("detailedLength").innerHTML = localStorage.getItem("movieLengthToBook");
@@ -27,7 +27,7 @@ async function loadSeats() {
     try {
         showingsId = await (await fetch(`/api/dannep/${temp.title}/${temp.time}`)).json();
 
-    } catch (ignore) { }
+    } catch (ignore) {}
 
     console.log(showingsId);
 
@@ -66,7 +66,7 @@ async function loadSeats() {
         cont.appendChild(div);
 
         let seatDiv = document.getElementById("seat" + i);
-        seatDiv.onclick = function () {
+        seatDiv.onclick = function() {
 
             if (this.style.backgroundColor === "green") {
                 this.style.backgroundColor = "yellow";
@@ -107,8 +107,7 @@ async function confirmBooking() {
     let user;
     try {
         user = await (await fetch('/api/login')).json();
-    }
-    catch (ignore) { }
+    } catch (ignore) {}
 
     //Create an object to hold the booking information
     let bookingInfo = { userName: user.userName, id: showingsId[0].id, bookedSeats: userSeats.toString() };
@@ -119,7 +118,7 @@ async function confirmBooking() {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(bookingInfo)
         })).json();
-    } catch (ignore) { }
+    } catch (ignore) {}
 
     try {
         result = await (await fetch('/api/showings', {
@@ -127,7 +126,7 @@ async function confirmBooking() {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(showingsId[0])
         })).json();
-    } catch (ignore) { }
+    } catch (ignore) {}
 
 
 }
