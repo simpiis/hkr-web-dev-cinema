@@ -88,22 +88,25 @@ h1{
 }
 
 #confirmButton {
-    margin: 1px;
-    background-color: rgb(143, 12, 12);
-    border: none;
-    color: white;
-    padding: 15px 32px;
+    display: block;
+    height: 60px;
+    width: 120px;
+    background: lightgreen;
+    border-color: lightgreen;
+    padding: 11px;
     text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
+    border-radius: 6px;
+    color: white;
+    font-weight: bold;
+    line-height: 25px;
 }
-
+/*
 #confirmButton:hover {
     background-color: green;
     color: white;
     cursor: pointer;
 }
+*/
 
 
 /* end of movie seat-booking*/
