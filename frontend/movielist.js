@@ -1,6 +1,6 @@
 const movies = [];
 
-function makeTable() {
+async function makeTable() {
     const x = document.getElementById("mySelect").value;
     const z = document.getElementById("dateIn").value;
     resetTable();
@@ -130,11 +130,16 @@ function makeTable() {
 
 }
 
-function moveOntoBooking() {
-    if (getIsLoggedIn() == true) {
-        document.getElementById("continueToBookingPage").style.visibility = "visible";
-    } else {
+async function moveOntoBooking() {
+    let user;
+    try {
+        user = await(await fetch('/api/login')).json();
+    } catch (ignore) { }
+    if (!user || user._error) {
         alert("You have to be logged in to book a movie.");
+        
+    } else {
+        document.getElementById("continueToBookingPage").style.visibility = "visible";
     }
 }
 
