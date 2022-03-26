@@ -7,7 +7,13 @@
         <p id="detailedRating"></p>
         <p id="detailedLength"></p>
     </div>
-
+    <div>
+        <button class="priceClassButton" id="adultPrice" onclick="setPriceClass(1)">Adult 85 sek</button>
+        <button class="priceClassButton" id="childPrice" onclick="setPriceClass(2)">Child 65 sek</button>
+        <button class="priceClassButton" id="retiredPrice" onclick="setPriceClass(3)">Retired 75 sek</button>
+        <h1 id="priceClass">Booking seat for: Adult</h1>
+        <h2 id="totalPrice">Total: SEK 0</h2>
+    </div>
     <div id=containerSeats></div>
     <button id=confirmButton onclick="confirmBooking()">Confirm</button>
 

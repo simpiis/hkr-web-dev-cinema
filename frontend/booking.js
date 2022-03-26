@@ -1,6 +1,9 @@
 let showingsId = {};
 let seats;
 var userSeats = [];
+var totalPrice = 0;
+//Priceclass 1 = adult, 2 = child, 3 = retired
+let seatPriceClass = 1;
 
 // Loads the information from the movie the customer wants to book by using localstorage.
 loadTheInfo();
@@ -12,7 +15,6 @@ function loadTheInfo() {
     document.getElementById("detailedDate").innerHTML = localStorage.getItem("movieDateToBook");
     document.getElementById("detailedLength").innerHTML = localStorage.getItem("movieLengthToBook");
     document.getElementById("detailedRating").innerHTML = localStorage.getItem("movieRatingToBook");
-
 
 }
 
@@ -63,17 +65,39 @@ async function loadSeats() {
         seatDiv.onclick = function () {
 
             if (this.style.backgroundColor === "green") {
-                this.style.backgroundColor = "yellow";
+
                 seats = markSeat(seats, i, 't')
                 userSeats[i] = `${i + 1}`;
-
+                switch (seatPriceClass) {
+                    case 1: totalPrice += 85;
+                        this.style.backgroundColor = "yellow";
+                        break;
+                    case 2: totalPrice += 65;
+                        this.style.backgroundColor = "gold";
+                        break;
+                    case 3: totalPrice += 75;
+                        this.style.backgroundColor = "goldenrod";
+                        break;
+                }
             } else if (this.style.backgroundColor === "yellow") {
                 this.style.backgroundColor = "green";
                 seats = markSeat(seats, i, 'f')
                 userSeats[i] = null;
-
+                totalPrice -= 85;
+            } else if (this.style.backgroundColor === "gold") {
+                this.style.backgroundColor = "green";
+                seats = markSeat(seats, i, 'f')
+                userSeats[i] = null;
+                totalPrice -= 65;
+            } else if (this.style.backgroundColor === "goldenrod") {
+                this.style.backgroundColor = "green";
+                seats = markSeat(seats, i, 'f')
+                userSeats[i] = null;
+                totalPrice -= 75;
             }
+            document.getElementById("totalPrice").innerHTML = "Total: SEK " + totalPrice;
         }
+
     }
 }
 
@@ -83,6 +107,9 @@ function markSeat(seatInfo, index, value) {
     return seatInfo
 }
 async function confirmBooking() {
+
+    //Cant book 0 seats
+    if (totalPrice >= 0) return;
 
     //Only add elements which are not null/undefined to userSeat array
     let temp = []
@@ -125,6 +152,25 @@ async function confirmBooking() {
             body: JSON.stringify(showingsId[0])
         })).json();
     } catch (ignore) { }
+
+    window.confirm("Seats: " + userSeats + " booked - Total: " + totalPrice + " SEK")
+
+}
+
+function setPriceClass(priceClass) {
+
+    switch (priceClass) {
+        case 1: document.getElementById("priceClass").innerHTML = "Booking seat for: Adult"
+            seatPriceClass = 1;
+            break;
+        case 2: document.getElementById("priceClass").innerHTML = "Booking seat for: Child"
+            seatPriceClass = 2;
+            break;
+        case 3: document.getElementById("priceClass").innerHTML = "Booking seat for: Retired"
+            seatPriceClass = 3;
+            break;
+    }
+
 
 }
 async function refreshBooking() {
