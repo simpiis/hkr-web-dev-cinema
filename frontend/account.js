@@ -40,4 +40,3 @@ async function renderHistory(user) {
   doc.innerHTML = html;
 
 }
-
