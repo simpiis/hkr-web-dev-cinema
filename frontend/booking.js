@@ -99,6 +99,7 @@ async function loadSeats() {
         }
 
     }
+
 }
 
 function markSeat(seatInfo, index, value) {
@@ -109,7 +110,7 @@ function markSeat(seatInfo, index, value) {
 async function confirmBooking() {
 
     //Cant book 0 seats
-    if (totalPrice >= 0) return;
+    if (totalPrice <= 0) return;
 
     //Only add elements which are not null/undefined to userSeat array
     let temp = []
@@ -155,6 +156,12 @@ async function confirmBooking() {
 
     window.confirm("Seats: " + userSeats + " booked - Total: " + totalPrice + " SEK")
 
+    //Reset everything
+    showingsId = {};
+    seats;
+    userSeats = [];
+    totalPrice = 0;
+    seatPriceClass = 1;
 }
 
 function setPriceClass(priceClass) {
