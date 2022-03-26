@@ -25,6 +25,14 @@ function getIsLoggedIn() {
 
 
 async function renderHistory(user) {
+  var today = new Date();
+
+  var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+
+  var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+
+  var dateTime = date + ' ' + time;
+  
   let bookingHistory;
   let html = "";
   let doc = document.getElementById('booking-history-div');
@@ -33,18 +41,25 @@ async function renderHistory(user) {
         bookingHistory = await (await fetch('/api/bookings/' + user.username)).json();
     } catch (ignore) {}
 
-  console.log(user.username);
-  console.log(bookingHistory);
+  
   let oldBookings = [];
   let futureBookings = [];
+  let counter = 0;
 
   for (let item of bookingHistory) {
-    if (item.start_time > new Date().toLocaleString) {
+    if (counter === 2) {
+      item.start_time = "2022-03-19 12:00:00"
+    }
+    if (new Date(item.start_time) > new Date(dateTime)) {
       futureBookings[futureBookings.length] = item;
     } else {
       oldBookings[oldBookings.length] = item;
     }
+    counter++;
   }
+
+  console.log("future bookings: ", futureBookings);
+  console.log("old bookings: ", oldBookings);
  
   
   if (futureBookings.length >= 1) {
@@ -53,7 +68,7 @@ async function renderHistory(user) {
 
     for (let item of futureBookings) {
       html += `
-    <p> ${item.movie_title} | ${item.start_time} | ${item.end_time} | ${item.room_name}   </p>
+    <p> ${item.movie_title} | Starts: ${item.start_time} | Ends: ${item.end_time} | Screening hall: ${item.room_name},  Seat Number: ${item.booked_seat}   </p>
     `
     
     }
@@ -64,7 +79,7 @@ async function renderHistory(user) {
   
     for (let item of oldBookings) {
       html += `
-    <p> ${item.movie_title} | ${item.start_time} | ${item.end_time} | ${item.room_name}   </p>
+    <p> ${item.movie_title} | Starts: ${item.start_time} | Ends: ${item.end_time} | Screening hall: ${item.room_name},  Seat Number: ${item.booked_seat}   </p>
     `
     }
   }
