@@ -56,27 +56,30 @@ async function renderHistory(user) {
     
   }
  
-  
-  if (futureBookings.length >= 1) {
-    html += "<h1>Upcoming bookings </h1>"
+  if (bookingHistory.length >= 1) {
+    if (futureBookings.length >= 1) {
+      html += "<h1>Upcoming bookings </h1>"
   
 
-    for (let item of futureBookings) {
-      html += `
+      for (let item of futureBookings) {
+        html += `
     <p> ${item.movie_title} | Starts: ${item.start_time} | Ends: ${item.end_time} | Screening hall: ${item.room_name},  Seat Number: ${item.booked_seat}   </p>
     `
     
+      }
     }
-  }
 
-  if (oldBookings.length >= 1) {
-    html += "<h1>Past bookings </h1>"
+    if (oldBookings.length >= 1) {
+      html += "<h1>Past bookings </h1>"
   
-    for (let item of oldBookings) {
-      html += `
+      for (let item of oldBookings) {
+        html += `
     <p> ${item.movie_title} | Starts: ${item.start_time} | Ends: ${item.end_time} | Screening hall: ${item.room_name},  Seat Number: ${item.booked_seat}   </p>
     `
+      }
     }
+  } else {
+    html += "<p>You have not made any bookings yet </p>"
   }
   doc.innerHTML = html;
 
