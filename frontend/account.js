@@ -44,22 +44,17 @@ async function renderHistory(user) {
   
   let oldBookings = [];
   let futureBookings = [];
-  let counter = 0;
+  
 
   for (let item of bookingHistory) {
-    if (counter === 2) {
-      item.start_time = "2022-03-19 12:00:00"
-    }
+   
     if (new Date(item.start_time) > new Date(dateTime)) {
       futureBookings[futureBookings.length] = item;
     } else {
       oldBookings[oldBookings.length] = item;
     }
-    counter++;
+    
   }
-
-  console.log("future bookings: ", futureBookings);
-  console.log("old bookings: ", oldBookings);
  
   
   if (futureBookings.length >= 1) {
