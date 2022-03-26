@@ -148,7 +148,7 @@ module.exports = function setupRESTapi(app, databaseConnection) {
 
     app.post('/api/bookings', (req, res) => {
         let stmt = db.prepare(`
-        INSERT INTO bookings (accounts_username, showings_id, booked_seat) VALUES ('${req.userName}', ${req.id}, '${req.bookedSeats}')
+        INSERT INTO bookings (accounts_username, showings_id, booked_seat) VALUES ('${req.body.userName}', ${req.body.id}, '${req.body.bookedSeats}')
         `)
         let booking = stmt.run(req.body)[0];
         res.json(booking);
@@ -215,7 +215,7 @@ module.exports = function setupRESTapi(app, databaseConnection) {
                     passwordEncryptor(req.body[passwordField]);
             }
 
-            runQuery(res, { ...req.body, ...req.params }, `
+            runQuery(res, {...req.body, ...req.params }, `
         UPDATE ${name}
         SET ${Object.keys(req.body).map(x => x + ' = :' + x)}
         WHERE id = :id
