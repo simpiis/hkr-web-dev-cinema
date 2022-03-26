@@ -79,6 +79,7 @@ module.exports = function setupRESTapi(app, databaseConnection) {
 
     });
 
+
     //sign the user in
     app.post('/api/login', (req, res) => {
 
@@ -144,6 +145,16 @@ module.exports = function setupRESTapi(app, databaseConnection) {
         res.json(history);
     });
 
+
+    app.post('/api/bookings', (req, res) => {
+        let stmt = db.prepare(`
+        INSERT INTO bookings (accounts_username, showings_id, booked_seat) VALUES ('${req.body.userName}', ${req.body.id}, '${req.body.bookedSeats}')
+        `)
+        let booking = stmt.run(req.body)[0];
+        res.json(booking);
+    });
+
+
     // Loop through all tables and views and create REST-routes for them
     for (let { name, type }
         of tablesAndViews) {
@@ -169,6 +180,10 @@ module.exports = function setupRESTapi(app, databaseConnection) {
 
         // Don't add POST, PUT or DELETE route to views
         if (type === 'view') {
+            continue;
+        }
+
+        if (name === 'bookings') {
             continue;
         }
 
@@ -200,7 +215,7 @@ module.exports = function setupRESTapi(app, databaseConnection) {
                     passwordEncryptor(req.body[passwordField]);
             }
 
-            runQuery(res, { ...req.body, ...req.params }, `
+            runQuery(res, {...req.body, ...req.params }, `
         UPDATE ${name}
         SET ${Object.keys(req.body).map(x => x + ' = :' + x)}
         WHERE id = :id

@@ -1,6 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Creepster&family=Lora:ital,wght@0,400;0,700;1,400;1,700&family=Source+Sans+Pro:wght@700&display=swap');
+
 body {
     margin: 0;
     background-color: rgba(79, 89, 221, 0.623);
+    font-size: 17px;
+    line-height: 135%;
+    font-family: 'Lora', serif;
     font-size: 17px;
     line-height: 135%;
     /* part of the sticky footer solution */
@@ -8,7 +13,12 @@ body {
     min-height: 100vh;
     flex-direction: column;
 }
-
+.logo{
+    font-family: 'Creepster';
+    font-weight: normal;
+    font-size: 39px;
+    margin: 0 0 10px;
+}
 nav a {
     color: rgb(218, 214, 214);
     padding: 0 10px;
@@ -78,22 +88,25 @@ h1{
 }
 
 #confirmButton {
-    margin: 1px;
-    background-color: #555555;
-    border: none;
-    color: white;
-    padding: 15px 32px;
+    display: block;
+    height: 60px;
+    width: 120px;
+    background: lightgreen;
+    border-color: lightgreen;
+    padding: 11px;
     text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
+    border-radius: 6px;
+    color: white;
+    font-weight: bold;
+    line-height: 25px;
 }
-
+/*
 #confirmButton:hover {
     background-color: green;
     color: white;
     cursor: pointer;
 }
+*/
 
 
 /* end of movie seat-booking*/

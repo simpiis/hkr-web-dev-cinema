@@ -22,20 +22,14 @@ async function loadSeats() {
     temp["title"] = localStorage.getItem("movieTitleToBook");
     temp["time"] = localStorage.getItem("movieDateToBook");
 
-
-
     try {
         showingsId = await (await fetch(`/api/dannep/${temp.title}/${temp.time}`)).json();
 
-    } catch (ignore) {}
+    } catch (ignore) { }
 
     console.log(showingsId);
 
     seats = showingsId[0].seat_list;
-
-    /*try {
-        seats = await (await fetch)
-    } catch (ignore) { }*/
 
 
     //Variable to hold the div containerSeats from booking.html
@@ -66,7 +60,7 @@ async function loadSeats() {
         cont.appendChild(div);
 
         let seatDiv = document.getElementById("seat" + i);
-        seatDiv.onclick = function() {
+        seatDiv.onclick = function () {
 
             if (this.style.backgroundColor === "green") {
                 this.style.backgroundColor = "yellow";
@@ -107,27 +101,30 @@ async function confirmBooking() {
     let user;
     try {
         user = await (await fetch('/api/login')).json();
-    } catch (ignore) {}
+    } catch (ignore) { }
 
     //Create an object to hold the booking information
-    let bookingInfo = { userName: user.userName, id: showingsId[0].id, bookedSeats: userSeats.toString() };
+    let bookingInfo = { userName: user.username, id: showingsId[0].id, bookedSeats: userSeats.toString() };
+    console.log(bookingInfo);
 
+    //POST booking info
     try {
         result = await (await fetch('/api/bookings', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(bookingInfo)
         })).json();
-    } catch (ignore) {}
+    } catch (ignore) { }
 
+
+    //PUT seats
     try {
-        result = await (await fetch('/api/showings', {
+        result = await (await fetch(`/api/showings/${showingsId[0].id}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(showingsId[0])
         })).json();
-    } catch (ignore) {}
-
+    } catch (ignore) { }
 
 }
 async function refreshBooking() {

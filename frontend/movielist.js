@@ -131,12 +131,16 @@ function makeTable() {
 }
 
 function moveOntoBooking() {
-    document.getElementById("continueToBookingPage").style.visibility = "visible";
+    if (getIsLoggedIn() == true) {
+        document.getElementById("continueToBookingPage").style.visibility = "visible";
+    } else {
+        alert("You have to be logged in to book a movie.");
+    }
 }
 
 function resetTable() {
     for (const tr of document.querySelectorAll(".moviestable tr")) {
-        for (const child of [...tr.children]) {
+        for (const child of[...tr.children]) {
             if (child.tagName !== "TH") {
                 child.remove();
             }
@@ -153,7 +157,7 @@ async function loadMov() {
     return data;
 }
 
-(async () => {
+(async() => {
     const arr = await loadMov();
     movies.push(...arr);
 })();

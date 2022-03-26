@@ -1,20 +1,26 @@
+let isLoggedIn = false;
+
+
 async function getLoggedIn() {
-  let user;
-  try {
-    user = await (await fetch('/api/login')).json();
-  }
-  catch (ignore) { }
-  
+    let user;
+    try {
+        user = await (await fetch('/api/login')).json();
+    } catch (ignore) {}
 
-  if (!user || user._error) {
-    document.getElementById('buttons').style.display = 'inline';
+    if (!user || user._error) {
+        document.getElementById('buttons').style.display = 'inline';
 
-  } else {
-    renderHistory(user);
-    document.getElementById('buttons').style.display = 'none';
-    document.getElementById('booking-history-div').style.display = 'inline'
-    
-  }
+    } else {
+        renderHistory(user);
+        document.getElementById('buttons').style.display = 'none';
+        document.getElementById('booking-history-div').style.display = 'inline'
+        isLoggedIn = true;
+        console.log(user);
+    }
+}
+
+function getIsLoggedIn() {
+    return isLoggedIn;
 }
 
 
@@ -23,9 +29,9 @@ async function renderHistory(user) {
   let html = "";
   let doc = document.getElementById('booking-history-div');
 
-  try {
-    bookingHistory = await (await fetch('/api/bookings/' + user.username)).json();
-  } catch (ignore) { }
+    try {
+        bookingHistory = await (await fetch('/api/bookings/' + user.username)).json();
+    } catch (ignore) {}
 
   console.log(user.username);
   console.log(bookingHistory);
