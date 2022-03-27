@@ -61,6 +61,8 @@ module.exports = function setupRESTapi(app, databaseConnection) {
         res.json(tablesAndViews);
     });
 
+
+    // get booking and showing info for a user
     app.get('/api/bookings/:id', (req, res) => {
 
         let stmt = db.prepare("SELECT * FROM bookingsxshowings WHERE accounts_username = :id ORDER BY start_time DESC");
@@ -107,6 +109,20 @@ module.exports = function setupRESTapi(app, databaseConnection) {
         res.json(req.session.user || { _error: 'Not logged in' });
     });
 
+    app.delete('/api/login', (req, res) => {
+        delete req.session.user;
+        res.json(req.session.user);
+    });
+
+    app.put('/api/showings', (req, res) => {
+       let stmt = db.prepare(`
+        UPDATE showings SET seat_list = '${req.body.seat_list}' WHERE id=${req.body.showings_id} AND start_time = '${req.body.start_time}'
+        `);
+        let confirm = stmt.run(req.body)[0];
+        res.json(confirm);
+    });
+
+   
 
 
     app.get('/api/trailers', (req, res) => {
@@ -136,15 +152,6 @@ module.exports = function setupRESTapi(app, databaseConnection) {
         res.json(showing);
     });
 
-    //get the booking and the showing information for every item in the user's booking history
-    app.get('/api/history/:id', (req, res) => {
-        let stmt = db.prepare(`
-    SELECT * FROM bookingsxshowings WHERE accounts_username = :id ORDER BY start_time DESC
-    `)
-        let history = stmt.all(req.params);
-        res.json(history);
-    });
-
 
     app.post('/api/bookings', (req, res) => {
         let stmt = db.prepare(`
@@ -152,6 +159,16 @@ module.exports = function setupRESTapi(app, databaseConnection) {
         `)
         let booking = stmt.run(req.body)[0];
         res.json(booking);
+    });
+
+    app.delete('/api/bookings', (req, res) => {
+        let stmt = db.prepare(`
+        DELETE FROM bookings WHERE accounts_username = '${req.body.accounts_username}' AND showings_id = ${req.body.showings_id}
+        `);
+
+        let confirm = stmt.run(req.body)[0];
+        
+        res.json(confirm);
     });
 
 
@@ -221,6 +238,7 @@ module.exports = function setupRESTapi(app, databaseConnection) {
         WHERE id = :id
       `);
         };
+        
 
         // Since the distinction between put and patch requests is 
         // floating nowadays let us provide the same logic for both
@@ -257,6 +275,7 @@ module.exports = function setupRESTapi(app, databaseConnection) {
         } else {
             // calling next will say "this middleware will not handle the response"
             next();
+            
         }
     });
 
