@@ -153,6 +153,11 @@ h1{
     float: right;
 }
 
+#booking-history-div{
+    display: none;
+
+}
+
 .account-content {
     text-align: center;
     justify-content: center;
